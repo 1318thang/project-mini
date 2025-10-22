@@ -15,6 +15,7 @@ const AppLayout: React.FC<Props> = () => {
                 <AppHeader />
             </header>
             <main className='flex-1 w-full  bg-[#d9d9d9] pt-[130px] md:pt-[95px]'>
+
                 <Outlet /> {/* //home */}
             </main>
             <footer className='w-full mt-auto'>

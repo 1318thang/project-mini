@@ -8,6 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 // const certPath = path.resolve(__dirname, 'cert.pem');
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/project-mini/',   // <--- thêm dòng này
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

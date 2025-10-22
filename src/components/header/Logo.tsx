@@ -8,7 +8,7 @@ const Logo: React.FC<Props> = ({ className }) => {
     console.log(className);
     return (
         <div id="logo" className="flex-shrink-0">
-            <a href='/'>
+            <a href='/project-mini/'>
                 <img src={logotemplate} alt="logo" className="h-[50px] w-auto object-contain" />
             </a>
         </div>
