@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* Ẩn scrollbar mặc định ban đầu */
+.custom-scroll::-webkit-scrollbar {
+  height: 8px;
+  /* thanh cuộn ngang */
+  background: transparent;
+}
+
+/* Track (nền scrollbar) */
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Thanh cuộn (thumb) */
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+  transition: background-color 0.4s ease-in-out;
+}
+
+/* Hover vào vùng scroll → thumb hiện dần */
+.custom-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+/* Hover trực tiếp vào thanh cuộn → đậm hơn */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(80, 80, 80, 0.8);
+}

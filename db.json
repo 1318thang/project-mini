@@ -1,0 +1,26 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Áo thun",
+            "price": 200000
+        },
+        {
+            "id": 2,
+            "name": "Quần jeans",
+            "price": 350000
+        },
+        {
+            "id": 3,
+            "name": "Giày sneaker",
+            "price": 800000
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "username": "admin",
+            "password": "123456"
+        }
+    ]
+}

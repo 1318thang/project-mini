@@ -1,0 +1,58 @@
+// import { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
+import './App.css'
+import {
+  BrowserRouter, Route,
+  // Router,
+  Routes
+} from 'react-router-dom'
+import AppLayout from './layouts/home/AppLayout'
+import Home from './pages/Home/home'
+import ProductDetail from './pages/Home/productdetail'
+import Cart from './pages/Home/cart'
+import Dashboard from './pages/Admin/dashboard'
+import PageProduct from './pages/Admin/product/pageProduct'
+import PageSize from './pages/Admin/size/pageSize'
+import PageColor from './pages/Admin/color/pageColor'
+import NotFoundPage from './pages/notfound'
+import AppLayoutAdmin from './layouts/admin/AppLayoutAdmin'
+import UserProfile from './pages/Admin/userprofile'
+import ProtectedRoute from './routes/ProtectedRoute'
+import GlobalModal from './components/common/GlobalModal'
+import SearchResult from './pages/Home/searchresults'
+function App() {
+
+  return (
+    // <div className='h-screen flex items-center justify-center bg-gray-100'>
+    //   <h1 className='text-4xl font-bold text-blue-600'>
+    //     Hello vite 7 + Tailwind V4
+    //   </h1>
+    // </div>
+    <BrowserRouter>
+      <GlobalModal />
+      <Routes>
+        {/* Role User */}
+        <Route element={<AppLayout />}>
+          <Route index path='' element={<Home />} />
+          <Route path="productdetail/:id" element={<ProductDetail />} />
+          <Route path=':keyword' element={<SearchResult />} />
+          <Route path="cart" element={<ProtectedRoute requiredRole={["User", "Admin"]}><Cart /></ProtectedRoute>} />
+        </Route>
+        {/* Role Admin */}
+        <Route element={<ProtectedRoute requiredRole="Admin"><AppLayoutAdmin /></ProtectedRoute>}>
+          <Route index path="dashboard" element={<Dashboard />} />
+          <Route path='product' element={<PageProduct />} />
+          <Route path='colorPro' element={<PageColor />} />
+          <Route path='sizePro' element={<PageSize />} />
+          <Route path='userprofile' element={<UserProfile />} />
+
+        </Route>
+        {/* Trang 404 */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
