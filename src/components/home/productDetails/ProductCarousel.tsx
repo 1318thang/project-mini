@@ -61,7 +61,7 @@ const ProductCarousel: React.FC<Props> = ({ page, setPage, trendKey, title, page
                                 </a>
                                 {/* onClick={() => navigate(`/productdetail/${item.id}`)} // ✅ chuyển trang */}
                                 <div className="flex flex-col gap-3">
-                                    <Link to={`/productdetail/${p.id}`}>
+                                    <Link to={`#/productdetail/${p.id}`}>
                                         {p.name}
                                     </Link>
                                     <div className="flex flex-row">

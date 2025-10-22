@@ -34,7 +34,7 @@ const ProductGrid: React.FC = () => {
                     image={p.mainImage}
                     title={p.name}
                     price={p.price.toString()}
-                    link={`/productdetail/${p.id}`}   // RESTful style
+                    link={`#/productdetail/${p.id}`}   // RESTful style
                 />
             ))}
         </div>

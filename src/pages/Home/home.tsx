@@ -83,7 +83,6 @@ const Home: React.FC = () => {
                 const [latesRes, allRes] = await Promise.allSettled([
                     fetchProductImageRandom(),
                     fetchProducts(page)
-
                 ]);
                 console.log(latesRes + " - " + allRes)
             } catch (err) {
@@ -116,7 +115,6 @@ const Home: React.FC = () => {
                 <BannerCarousel images={carouselImages} />
                 <PromotionSection images={promotionImages} />
             </div>
-
             {/* Section title */}
             <SectionTitle text={lang === 'vi' ? 'Gợi ý hôm nay' : lang === 'en' ? 'Today’s Suggestions' : '本日のおすすめ'} />{/* // 🇯🇵 tiếng Nhật */}
 

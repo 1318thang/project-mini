@@ -72,7 +72,7 @@ const ProductPurchase: React.FC = () => {
                 onClick={handleAddToCart}
                 disabled={loading}
                 className="bg-green-600 text-white rounded-lg p-2 w-full max-w-[187.5px] text-[7px] md:text-[15px] lg:text-[20px]">
-                <a href="/cart">
+                <a href="#/cart">
                     <b>Cart</b>
                 </a>
             </button>

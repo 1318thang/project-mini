@@ -35,17 +35,17 @@ function App() {
         {/* Role User */}
         <Route element={<AppLayout />}>
           <Route index element={<Home />} />
-          <Route path="project-mini/productdetail/:id" element={<ProductDetail />} />
-          <Route path='project-mini/:keyword' element={<SearchResult />} />
-          <Route path="project-mini/cart" element={<ProtectedRoute requiredRole={["User", "Admin"]}><Cart /></ProtectedRoute>} />
+          <Route path="productdetail/:id" element={<ProductDetail />} />
+          <Route path=':keyword' element={<SearchResult />} />
+          <Route path="cart" element={<ProtectedRoute requiredRole={["User", "Admin"]}><Cart /></ProtectedRoute>} />
         </Route>
         {/* Role Admin */}
         <Route element={<ProtectedRoute requiredRole="Admin"><AppLayoutAdmin /></ProtectedRoute>}>
           <Route index path="project-mini/dashboard" element={<Dashboard />} />
-          <Route path='project-mini/product' element={<PageProduct />} />
-          <Route path='project-mini/colorPro' element={<PageColor />} />
-          <Route path='project-mini/sizePro' element={<PageSize />} />
-          <Route path='project-mini/userprofile' element={<UserProfile />} />
+          <Route path='product' element={<PageProduct />} />
+          <Route path='colorPro' element={<PageColor />} />
+          <Route path='sizePro' element={<PageSize />} />
+          <Route path='userprofile' element={<UserProfile />} />
 
         </Route>
         {/* Trang 404 */}

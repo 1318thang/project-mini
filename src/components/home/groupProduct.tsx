@@ -39,7 +39,7 @@ const GroupProduct: React.FC<Props> = () => {
                             {group.map((item, j) => (
                                 <div
                                     key={j}
-                                    onClick={() => navigate(`/${item.keyword}`)} // 👈 Điều hướng tới SearchResult
+                                    onClick={() => navigate(`#/${item.keyword}`)} // 👈 Điều hướng tới SearchResult
                                     className="flex flex-col items-center justify-center border-gray-200 rounded-lg p-3 hover:shadow-md transition cursor-pointer"
                                 >
                                     <img

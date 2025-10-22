@@ -29,7 +29,7 @@ const InternationalProduct: React.FC<Props> = () => {
                             <img
                                 key={index}
                                 src={item.mainImage}
-                                onClick={() => navigate(`/productdetail/${item.id}`)} // ✅ chuyển trang
+                                onClick={() => navigate(`#/productdetail/${item.id}`)} // ✅ chuyển trang
                                 alt="Product"
                                 className="w-40 h-40 object-cover rounded-md flex-shrink-0"
                             />
