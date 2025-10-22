@@ -41,7 +41,7 @@ function App() {
         </Route>
         {/* Role Admin */}
         <Route element={<ProtectedRoute requiredRole="Admin"><AppLayoutAdmin /></ProtectedRoute>}>
-          <Route index path="project-mini/dashboard" element={<Dashboard />} />
+          <Route index path="dashboard" element={<Dashboard />} />
           <Route path='product' element={<PageProduct />} />
           <Route path='colorPro' element={<PageColor />} />
           <Route path='sizePro' element={<PageSize />} />

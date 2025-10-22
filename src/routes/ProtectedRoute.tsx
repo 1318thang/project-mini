@@ -10,11 +10,8 @@ const ProtectedRoute = ({ children, requiredRole }: any) => {
     const navigate = useNavigate();
     const location = useLocation();
     const redirected = useRef(false); // tránh redirect lặp
-
     useEffect(() => {
-
         if (!user && !redirected.current) {
-
             redirected.current = true;
 
             // 1️⃣ Bật modal login ngay
@@ -37,7 +34,6 @@ const ProtectedRoute = ({ children, requiredRole }: any) => {
             }
         }
     }, [user, requiredRole, dispatch, navigate, location.pathname]);
-
     // Không render children nếu chưa đúng quyền
     // ❌ Không render children nếu chưa có user hoặc role sai
     if (
