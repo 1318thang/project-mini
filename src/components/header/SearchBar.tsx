@@ -37,7 +37,7 @@ const SearchBar: React.FC<Props> = () => {
                 </button>
             </form>
             <button className="hidden md:block px-3 md:ml-4 text-gray-400 hover:text-gray-500 transition-colors">
-                <a href='/cart'>
+                <a href='/project-mini/cart'>
                     <FaCartShopping className="text-[22px]" />
                 </a>
             </button>
