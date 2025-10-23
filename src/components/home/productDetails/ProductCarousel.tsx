@@ -56,13 +56,13 @@ const ProductCarousel: React.FC<Props> = ({ page, setPage, trendKey, title, page
                     {visibleProducts.map((p) => (
                         <li key={p.id} className="w-[165px]">
                             <span className="flex flex-col gap-2">
-                                <a href="/productdetails/">
+                                <Link to={`/productdetail/${p.id}`}>
                                     <img src={p.mainImage} alt="" className="w-full h-[165px] object-cover" />
-                                </a>
+                                </Link>
                                 {/* onClick={() => navigate(`/productdetail/${item.id}`)} // ✅ chuyển trang */}
                                 <div className="flex flex-col gap-3">
-                                    <Link to={`#/productdetail/${p.id}`}>
-                                        {p.name}
+                                    <Link to={`/productdetail/${p.id}`}>
+                                        <p className="line-clamp-3">{p.name}</p>
                                     </Link>
                                     <div className="flex flex-row">
                                         <FaStar className="text-yellow-400" />

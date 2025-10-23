@@ -57,7 +57,7 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
             console.log("User info: ", res.user.email, res.user.Role, res.user.id);
             if (res.user.Role != null) {
                 const userRole = res.user.Role;
-                if (userRole === "Admin") navigate("#/dashboard");
+                if (userRole === "Admin") navigate("/dashboard");
                 else navigate("#/");
                 // 🔹 Đóng modal với delay animation (nếu muốn)
                 setTimeout(() => onClose(), 300); // 300ms tương ứng duration transiti
