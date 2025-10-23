@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../redux/store';
 import { logout } from '../../redux/authSlice';
 import { authService } from '../../api/auth/authService';
-import type { LogoutResponseType } from '../../type/LogoutResponseType';
+import type { LogoutResponseType } from '../../type/auth/LogoutResponseType';
 import type { AxiosError } from 'axios';
 import axios from 'axios';
 import { setLanguage } from '../../redux/languageSlice'; // ✅ import

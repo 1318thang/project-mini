@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import type { LoginResponseType } from "../../type/LoginResponseType";
+import type { LoginResponseType } from "../../type/auth/LoginResponseType";
 import { authService } from "../../api/auth/authService";
 import { loginSuccess } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
