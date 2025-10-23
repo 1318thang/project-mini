@@ -83,6 +83,7 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
                 alert("Register successful! You can now login.");
                 switchMode("login");
             } else {
+                alert("Register fail! You try again.");
                 setError(res.message || "Register failed");
             }
         } catch (err: any) {
