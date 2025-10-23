@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import type { InternalAxiosRequestConfig } from "axios";
 // Tạo instance axios
 const httpClient = axios.create({
-    baseURL: "http://projectecommers.runasp.net/api/",
+    baseURL: "https://bold-wind-c8e3.1318thang.workers.dev/api/",
     timeout: 5000,
 });
 // Interceptor request
