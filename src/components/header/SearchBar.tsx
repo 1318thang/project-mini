@@ -16,7 +16,7 @@ const SearchBar: React.FC<Props> = () => {
         if (!query.trim()) return;
 
         // Điều hướng đến trang search có keyword
-        navigate(`#/${encodeURIComponent(query.trim())}`);
+        navigate(`/${encodeURIComponent(query.trim())}`);
         setQuery(""); // clear input nếu muốn
     };
     return (
@@ -38,7 +38,7 @@ const SearchBar: React.FC<Props> = () => {
             </form>
             <button className="hidden md:block px-3 md:ml-4 text-gray-400 hover:text-gray-500 transition-colors">
                 <a href='#/cart'>
-                    <FaCartShopping className="text-[22px]" />1
+                    <FaCartShopping className="text-[22px]" />
                 </a>
             </button>
         </div>

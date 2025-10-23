@@ -52,7 +52,7 @@ const ProductInfo: React.FC<props> = () => {
                 <b>Color</b>
             </h3>
             <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 gap-2 w-full">
-                {Array.from({ length: 6 }).map((_, i) => {
+                {/* {Array.from({ length: 6 }).map((_, i) => {
                     const filters = [
                         "none",
                         "grayscale(100%) brightness(1.2) contrast(1)", // xám đậm
@@ -72,7 +72,7 @@ const ProductInfo: React.FC<props> = () => {
                             />
                         </div>
                     );
-                })}
+                })} */}
             </div>
             <hr className="h-1 border-0 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full" />
 

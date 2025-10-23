@@ -5,7 +5,6 @@ import { openModal } from "../../redux/uiSlice";
 
 const AppHeader: React.FC = () => {
     const dispatch = useDispatch();
-
     return (
         <div className="bg-white shadow-md w-full">
             <TopBar

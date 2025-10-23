@@ -39,12 +39,12 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
                     role: res.role, // ✅ Thêm thủ công nếu thiếu
                     id: res.id,
                 },
+                status: "succeeded",
+                message: "Login successful"
             }));     // ✅ lưu vào Redux luôn
             // 🔹 Redirect trước
-
             var _accessToken = localStorage.getItem("accessToken");
             var _refreshToken = localStorage.getItem("refreshToken");
-
             var userString = localStorage.getItem("user");
             if (userString) {
                 const user = JSON.parse(userString); // chuyển lại thành object
@@ -57,8 +57,8 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
             console.log("User info: ", res.user.email, res.user.Role, res.user.id);
             if (res.user.Role != null) {
                 const userRole = res.user.Role;
-                if (userRole === "Admin") navigate("/dashboard");
-                else navigate("/");
+                if (userRole === "Admin") navigate("#/dashboard");
+                else navigate("#/");
                 // 🔹 Đóng modal với delay animation (nếu muốn)
                 setTimeout(() => onClose(), 300); // 300ms tương ứng duration transiti
             }
@@ -69,6 +69,28 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
             setLoading(false);
         }
     }
+    const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+
+        try {
+            const name = (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value;
+            const email = (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value;
+            const password = (e.currentTarget.elements.namedItem("password") as HTMLInputElement).value;
+            const res = await authService.register({ name, email, password });
+            if (res.success) {
+                alert("Register successful! You can now login.");
+                switchMode("login");
+            } else {
+                setError(res.message || "Register failed");
+            }
+        } catch (err: any) {
+            setError(err.response?.data?.message || "Register failed");
+        } finally {
+            setLoading(false);
+        }
+    };
     useEffect(() => {
         if (open) { // nếu open = true thì mở modal    
             console.log(open)
@@ -85,7 +107,6 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
     const switchMode = (newMode: "login" | "register") => {
         if (newMode === current) return;
         setAnimating(current === "login" ? "login-out" : "register-out");
-
         // Sau 700ms (thời gian animation), đổi mode
         setTimeout(() => {
             setCurrent(newMode);
@@ -176,12 +197,12 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
                                 </h1>
                             </div>
                             <br />
-                            <form action="">
-                                <input type="text" placeholder="Họ và tên" className="w-full border rounded px-3 py-2 mb-3" />
-                                <input type="email" placeholder="Email" className="w-full border rounded px-3 py-2 mb-3" />
-                                <input type="password" placeholder="Mật khẩu" className="w-full border rounded px-3 py-2 mb-3" />
+                            <form onSubmit={handleRegister}>
+                                <input type="text" name="name" placeholder="Họ và tên" className="w-full border rounded px-3 py-2 mb-3" />
+                                <input type="email" name="email" placeholder="Email" className="w-full border rounded px-3 py-2 mb-3" />
+                                <input type="password" name="password" placeholder="Mật khẩu" className="w-full border rounded px-3 py-2 mb-3" />
                                 <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded">
-                                    Sign Up
+                                    {loading ? "Registering.." : "Sign Up"}
                                 </button>
                             </form>
                             <p className="mt-3 text-sm text-center">

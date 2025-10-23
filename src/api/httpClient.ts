@@ -3,6 +3,8 @@ import type { InternalAxiosRequestConfig } from "axios";
 // Tạo instance axios
 const httpClient = axios.create({
     baseURL: "https://bold-wind-c8e3.1318thang.workers.dev/api/",
+    // baseURL: "https://localhost:7140/api/",
+
     timeout: 5000,
 });
 // Interceptor request
@@ -35,27 +37,28 @@ httpClient.interceptors.response.use(
 
             if (!refreshToken) {
                 console.warn("⚠️ Refresh token missing → logout");
-                window.location.href = "/login"; // hoặc dispatch logout
+                window.location.href = "#/login"; // hoặc dispatch logout
                 return Promise.reject(error);
             }
             try {
-                const res = await axios.post("https://localhost:7140/api/Auth/refresh-token", {
+                // const res = await axios.post("https://localhost:7140/api/Auth/refresh-token", {
+                //     refreshToken,
+                // });
+                const res = await axios.post("https://bold-wind-c8e3.1318thang.workers.dev/api/Auth/refresh-token", {
                     refreshToken,
                 });
 
                 const newAccessToken = (res.data as any).accessToken;
                 localStorage.setItem("accessToken", newAccessToken);
-
                 // Cập nhật header cũ
                 originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
-
                 // Gửi lại request cũ
                 return httpClient(originalRequest);
             } catch (refreshErr) {
                 console.error("🔒 Refresh token failed:", refreshErr);
                 localStorage.removeItem("accessToken");
                 localStorage.removeItem("refreshToken");
-                window.location.href = "/login";
+                window.location.href = "#/login";
                 return Promise.reject(refreshErr);
             }
         }
