@@ -4,7 +4,7 @@ import type { InternalAxiosRequestConfig } from "axios";
 const httpClient = axios.create({
     baseURL: "https://bold-wind-c8e3.1318thang.workers.dev/api/",
     // baseURL: "https://localhost:7140/api/",
-    timeout: 10000,
+    timeout: 15000,
 });
 // Interceptor request
 httpClient.interceptors.request.use(
