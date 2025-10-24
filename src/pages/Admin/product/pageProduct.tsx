@@ -38,7 +38,6 @@ const PageProduct: React.FC<Props> = () => {
             throw new Error("Get product All failed");
         }
     }
-
     const productLates = async (): Promise<productType[]> => {
         try {
             setLoading(true);
@@ -46,7 +45,6 @@ const PageProduct: React.FC<Props> = () => {
             // dispatch slice với mảng
             // console.log("productLates : ", getdata);
             dispatch(getProductLasted(getdata));
-
             return getdata;
         } catch (e) {
             console.error(e);
@@ -62,7 +60,6 @@ const PageProduct: React.FC<Props> = () => {
             const data = await ProRepository.createPro(newPro);
             dispatch(createProduct(data));
             setProduct(prev => [...prev, data]);
-
             // 🔹 Join group nếu category thay đổi
             const category = newPro.get("category") as string;
             if (currentCategory !== category) {
@@ -136,7 +133,6 @@ const PageProduct: React.FC<Props> = () => {
         { key: "form", label: "Form" },
         { key: "filter", label: "Filter" },
     ];
-
     return (
         <div className="w-full">
             <div className="flex gap-2 mb-6 px-4">
@@ -164,5 +160,4 @@ const PageProduct: React.FC<Props> = () => {
         </div>
     );
 };
-
 export default PageProduct;

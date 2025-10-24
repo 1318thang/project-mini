@@ -1,12 +1,10 @@
 import React from "react";
-
 type ProductCardProps = {
     image: string;
     title: string;
     price: string;
     link: string;
 };
-
 const ProductCard: React.FC<ProductCardProps> = ({ image, title, price, link }) => {
     return (
         <div className="w-[180px] md:w-[200px] h-auto bg-white flex flex-col gap-8 rounded-lg">
@@ -14,8 +12,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, price, link }) 
                 <img
                     src={image}
                     alt={title}
-                    className="w-[180px] md:w-[200px] h-[164px] rounded-t-lg"
-                />
+                    className="w-[180px] md:w-[200px] h-[164px] rounded-t-lg" />
             </div>
             <div className="w-[166px] px-2">
                 <a href={link}>
@@ -38,5 +35,4 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, price, link }) 
         </div>
     );
 };
-
 export default ProductCard;

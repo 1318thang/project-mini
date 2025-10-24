@@ -1,9 +1,7 @@
 import React from "react";
-
 type LoadMoreButtonProps = {
     onClick?: () => void;
 };
-
 const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({ onClick }) => {
     return (
         <div className="flex justify-center p-3">
@@ -13,5 +11,4 @@ const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({ onClick }) => {
         </div>
     );
 };
-
 export default LoadMoreButton;

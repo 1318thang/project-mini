@@ -38,8 +38,6 @@ const SearchInfo: React.FC<Props> = () => {
     const handleSelectImage = (id: number, src: string) => {
         setSelectedImages((prev) => ({ ...prev, [id]: src }));
     };
-
-
     const handleAddToCart = async (idpro: number) => {
 
         if (!idpro) return;
@@ -47,14 +45,13 @@ const SearchInfo: React.FC<Props> = () => {
         try {
             const user = JSON.parse(localStorage.getItem("user")!);
             const userid = user.id;// emulator userId
-            console.log("userId = " + userid);
+            // console.log("userId = " + userid);
             const cartItem: Omit<cartItemType, "id"> = {
                 userId: userid, // giả sử user đang đăng nhập là id=1
                 productId: idpro,
                 quantity: 1,
                 CreatedAt: new Date()
             };
-
             const result = await CartRepository.AddToCart(cartItem);
             console.log("Added to cart:", result);
             alert("Sản phẩm đã được thêm vào giỏ hàng!");
@@ -65,10 +62,7 @@ const SearchInfo: React.FC<Props> = () => {
         } finally {
             // setLoading(false);
         }
-
-
     }
-
     return (
         <>
             {products.map((p) => {
@@ -108,7 +102,6 @@ const SearchInfo: React.FC<Props> = () => {
                                             />
                                         ))}
                                 </div>
-
                                 <button
                                     className="bg-gray-200 hover:bg-gray-300 p-1 rounded"
                                     onClick={() => handleNext(p.id, totalImages)}
@@ -118,7 +111,6 @@ const SearchInfo: React.FC<Props> = () => {
                                 </button>
                             </div>
                         </div>
-
                         {/* === THÔNG TIN SẢN PHẨM === */}
                         <div className="flex flex-col gap-2 text-center flex-grow justify-between">
                             <a href={`/productdetail/${p.id}`}>
@@ -154,5 +146,4 @@ const SearchInfo: React.FC<Props> = () => {
         </>
     );
 };
-
 export default SearchInfo;

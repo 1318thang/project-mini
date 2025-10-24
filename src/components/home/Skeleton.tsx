@@ -1,6 +1,4 @@
 import React from "react";
-
-
 type SkeletonProps = {
     type: "cart" | "product";
     count?: number; // số ô skeleton cần hiển thị
@@ -45,5 +43,4 @@ const Skeleton: React.FC<SkeletonProps> = ({ type, count = 6 }) => {
         <div></div>
     );
 };
-
 export default Skeleton;

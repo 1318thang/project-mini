@@ -1,11 +1,5 @@
 import React from 'react';
-// import { FaChartBar, FaTable, FaUser } from 'react-icons/fa';
-
-interface Props {
-
-}
-
-const AppSidebar: React.FC<Props> = () => {
+const AppSidebar: React.FC = () => {
     return (
         <div></div>
         // <aside

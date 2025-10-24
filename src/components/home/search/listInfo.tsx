@@ -2,22 +2,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../redux/store';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-
-interface Props {
-
-}
-
-const ListInfo: React.FC<Props> = () => {
+const ListInfo: React.FC = () => {
     const products = useSelector((state: RootState) => state.products.resultSearch);
-
-    console.log(products);
-    // mỗi sản phẩm có state riêng
     const [selectedImages, setSelectedImages] = useState<Record<number, string>>({});
     const [startIndexes, setStartIndexes] = useState<Record<number, number>>({});
-
-
     const visibleCount = 5;
-
     const handleNext = (id: number, total: number) => {
         setStartIndexes((prev) => {
             const current = prev[id] || 0;
@@ -27,7 +16,6 @@ const ListInfo: React.FC<Props> = () => {
             return prev;
         });
     };
-
     const handlePrev = (id: number) => {
         setStartIndexes((prev) => {
             const current = prev[id] || 0;
@@ -37,7 +25,6 @@ const ListInfo: React.FC<Props> = () => {
             return prev;
         });
     };
-
     const handleSelectImage = (id: number, src: string) => {
         setSelectedImages((prev) => ({ ...prev, [id]: src }));
     };
@@ -59,7 +46,6 @@ const ListInfo: React.FC<Props> = () => {
                                         src={mainImg}
                                         className="w-full h-[250px] object-cover rounded-lg"
                                     />
-
                                     <div className="hidden md:flex items-center justify-center gap-2 mt-2">
                                         <button
                                             onClick={() => handlePrev(p.id)}
@@ -67,7 +53,6 @@ const ListInfo: React.FC<Props> = () => {
                                         >
                                             <ArrowLeft className="w-5 h-5 text-gray-600" />
                                         </button>
-
                                         <div className="flex gap-1 mx-2 overflow-hidden">
                                             {secondaryImages
                                                 .slice(currentStart, currentStart + visibleCount)
@@ -80,7 +65,6 @@ const ListInfo: React.FC<Props> = () => {
                                                     />
                                                 ))}
                                         </div>
-
                                         <button
                                             onClick={() => handleNext(p.id, secondaryImages.length)}
                                             className="p-1 bg-gray-200 rounded hover:bg-gray-300"
@@ -89,7 +73,6 @@ const ListInfo: React.FC<Props> = () => {
                                         </button>
                                     </div>
                                 </div>
-
                                 {/* RIGHT: Thông tin sản phẩm */}
                                 <div className="flex flex-col md:flex-row justify-between flex-grow px-0 md:px-4 gap-4 md:gap-10">
                                     <div className='flex-1 min-w-0'>
@@ -115,5 +98,4 @@ const ListInfo: React.FC<Props> = () => {
         </>
     );
 };
-
 export default ListInfo;    

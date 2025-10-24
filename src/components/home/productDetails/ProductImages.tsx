@@ -9,18 +9,15 @@ const ProductImages: React.FC = () => {
     // lưu màu đang chọn (mặc định none)
     const [selectedImg, setSelectedImg] = useState<string | null>(null);
     const images = [products?.mainImage, ...(products?.secondaryImage ?? [])];
-
     // hiển thị tối đa 4 ảnh thumbnail một lần
     const [startIndex, setStartIndex] = useState(0);
     const visibleCount = 4;
     const visibleImages = images.slice(startIndex, startIndex + visibleCount);
-
     const nextThumbGroup = () => {
         if (startIndex + visibleCount < images.length) {
             setStartIndex(startIndex + 1);
         }
     };
-
     const prevThumbGroup = () => {
         if (startIndex > 0) {
             setStartIndex(startIndex - 1);
@@ -69,20 +66,17 @@ const ProductImages: React.FC = () => {
                         </div>
                     ))}
                 </div>
-
                 <button
                     onClick={nextThumbGroup}
                     disabled={startIndex + visibleCount >= images.length}
                     className={`p-1 rounded-full ${startIndex + visibleCount >= images.length
                         ? "opacity-40 cursor-not-allowed"
                         : "hover:bg-gray-100"
-                        }`}
-                >
+                        }`}>
                     <ChevronRight size={18} />
                 </button>
             </div>
         </div>
     );
 };
-
 export default ProductImages;

@@ -4,7 +4,6 @@ import { Autoplay, Pagination } from "swiper/modules";
 type BannerCarouselProps = {
     images: string[];
 };
-
 const BannerCarousel: React.FC<BannerCarouselProps> = ({ images }) => {
     return (
         <Swiper
@@ -27,5 +26,4 @@ const BannerCarousel: React.FC<BannerCarouselProps> = ({ images }) => {
         </Swiper>
     );
 };
-
 export default BannerCarousel;

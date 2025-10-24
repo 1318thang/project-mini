@@ -1,4 +1,3 @@
-// filtersConfig.ts
 export const keywordCategoryMap: Record<string, string> = {
     shirt: "fashion",
     jean: "fashion",
@@ -9,7 +8,6 @@ export const keywordCategoryMap: Record<string, string> = {
     phone: "electronic",
     laptop: "electronic",
 };
-
 export const filtersByCategory: Record<string, { title: string; options: string[] }[]> = {
     fashion: [
         { title: "Size", options: ["S", "M", "L", "XL"] },

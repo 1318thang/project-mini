@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import axios from "../api/httpClient";
 import { useAuth } from "./useAuth";
-
 export const useAxiosAuth = () => {
     const { accessToken, refresh, logout } = useAuth();
-
     useEffect(() => {
         const requestIntercept = axios.interceptors.request.use((config) => {
             if (accessToken && config.headers) {
@@ -12,7 +10,6 @@ export const useAxiosAuth = () => {
             }
             return config;
         });
-
         const responseIntercept = axios.interceptors.response.use(
             (response) => response,
             async (error) => {
@@ -29,12 +26,10 @@ export const useAxiosAuth = () => {
                 return Promise.reject(error);
             }
         );
-
         return () => {
             axios.interceptors.request.eject(requestIntercept);
             axios.interceptors.response.eject(responseIntercept);
         };
     }, [accessToken, refresh, logout]);
-
     return axios;
 };

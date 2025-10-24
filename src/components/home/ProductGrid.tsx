@@ -2,21 +2,12 @@ import React from "react";
 import ProductCard from "./ProductCard";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
-// import type { productType } from "../../type/productType";
+
 import Skeleton from "./Skeleton";
-
-
-
-// type ProductGridProps = {
-//     products: productType[];
-// };
-
 const ProductGrid: React.FC = () => {
-    // const products = useSelector((state: RootState) => state.products.homeProducts);
     const { homeProducts: products, loading } = useSelector(
         (state: RootState) => state.products
     );
-    // const { lang } = useSelector((state: RootState) => state.language);// language
     if (loading) {
         return (
             <ul className="flex flex-col gap-4">
@@ -40,5 +31,4 @@ const ProductGrid: React.FC = () => {
         </div>
     );
 };
-
 export default ProductGrid;

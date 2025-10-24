@@ -2,7 +2,6 @@ import React from "react";
 import { TopBar, Logo, SearchBar } from "../../components/header";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../redux/uiSlice";
-
 const AppHeader: React.FC = () => {
     const dispatch = useDispatch();
     return (
@@ -18,5 +17,4 @@ const AppHeader: React.FC = () => {
         </div>
     );
 };
-
 export default AppHeader;

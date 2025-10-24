@@ -1,9 +1,7 @@
 import React from "react";
-
 type PromotionSectionProps = {
     images: string[];
 };
-
 const PromotionSection: React.FC<PromotionSectionProps> = ({ images }) => {
     return (
         <div id="promotion" className="hidden md:flex flex-col gap-1">
@@ -18,5 +16,4 @@ const PromotionSection: React.FC<PromotionSectionProps> = ({ images }) => {
         </div>
     );
 };
-
 export default PromotionSection;

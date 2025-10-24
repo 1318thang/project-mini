@@ -1,9 +1,7 @@
 import React from "react";
-
 type SectionTitleProps = {
     text: string;
 };
-
 const SectionTitle: React.FC<SectionTitleProps> = ({ text }) => {
     return (
         <div className="flex justify-center bg-white p-4">
@@ -16,5 +14,4 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ text }) => {
         </div>
     );
 };
-
 export default SectionTitle;

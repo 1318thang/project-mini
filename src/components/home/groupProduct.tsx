@@ -1,10 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-interface Props {
-
-}
-
-const GroupProduct: React.FC<Props> = () => {
+const GroupProduct: React.FC = () => {
     const navigate = useNavigate();
     const groups = [
         [
@@ -56,9 +52,7 @@ const GroupProduct: React.FC<Props> = () => {
                     </div>
                 ))}
             </div>
-
         </div>
     );
 };
-
 export default GroupProduct;

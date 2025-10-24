@@ -1,15 +1,10 @@
-// ProductInfo.tsx
 import React from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../redux/store";
 import DOMPurify from "dompurify";
-interface props {
-    // product: productType[];
-}
-const ProductInfo: React.FC<props> = () => {
+const ProductInfo: React.FC = () => {
     const products = useSelector((state: RootState) => state.products.selectProduct);
-
     return (
         <div className="flex flex-col w-full max-w-[505px] gap-3">
             <h3 className="text-[9px] md:text-lg">
@@ -75,13 +70,10 @@ const ProductInfo: React.FC<props> = () => {
                 })} */}
             </div>
             <hr className="h-1 border-0 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full" />
-
-
             <div
                 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(products?.description || "") }}
             />
         </div>
     );
 };
-
 export default ProductInfo;

@@ -1,6 +1,5 @@
 import React from 'react';
 import ColorView from '../../../components/admin/color/ColorView';
-
 interface Props {
 
 }
@@ -11,5 +10,4 @@ const PageColor: React.FC<Props> = () => {
         </div>
     );
 };
-
 export default PageColor;

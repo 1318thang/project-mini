@@ -8,7 +8,6 @@ interface Props {
     keyword: string | undefined;
     onFiltersChange?: (filters: any) => void;
 }
-
 const FilterInfo: React.FC<Props> = ({ keyword, onFiltersChange }) => {
     console.log(keyword)
     // const products = useSelector((state: RootState) => state.products.resultSearch);
@@ -18,7 +17,6 @@ const FilterInfo: React.FC<Props> = ({ keyword, onFiltersChange }) => {
         selectedOptions: {} as Record<string, string[]>, // lưu các checkbox được tick
     });
     const [showAllStates, setShowAllStates] = useState<Record<string, boolean>>({});
-
     const toggleShowAll = (name: string) => {
         setShowAllStates(prev => ({
             ...prev,
@@ -68,7 +66,6 @@ const FilterInfo: React.FC<Props> = ({ keyword, onFiltersChange }) => {
             onFiltersChange(filtersState); // 🔹 Gửi toàn bộ state lên cha
         }
     }, [filtersState.selectedOptions]);
-
     return (
         <>
             <h4>Recently use filter</h4>
@@ -121,7 +118,6 @@ const FilterInfo: React.FC<Props> = ({ keyword, onFiltersChange }) => {
             ).map(([name, values]) => {
                 const showAll = showAllStates[name] || false;
                 const displayedValues = showAll ? values : values.slice(0, 5);
-
                 return (
                     <div key={name} className="py-2">
                         <p><b>{name}</b></p>
@@ -148,11 +144,7 @@ const FilterInfo: React.FC<Props> = ({ keyword, onFiltersChange }) => {
                     </div>
                 );
             })}
-
-
-
         </>
     );
 };
-
 export default FilterInfo;

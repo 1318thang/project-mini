@@ -2,11 +2,9 @@ import React from 'react';
 import { FaInstagram, FaTiktok } from 'react-icons/fa';
 import { FaFacebook } from 'react-icons/fa6';
 import zaloIcon from '../../../public/iconZalo.png';
-
 interface Props {
 
 }
-
 const AppFooter: React.FC<Props> = () => {
     return (
         <div className=' grid grid-cols-[55%_45%] bg-[#f5f5f5] shadow-md  px-2 py-1 text-[5px] sm:text-[11px] lg:text-[15px]'>
@@ -60,13 +58,9 @@ const AppFooter: React.FC<Props> = () => {
                             Subscribe
                         </button>
                     </form>
-
                 </div>
-
             </div>
-
         </div>
     );
 };
-
 export default AppFooter;

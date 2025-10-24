@@ -2,11 +2,7 @@ import React from 'react';
 import type { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-interface Props {
-
-}
-
-const InternationalProduct: React.FC<Props> = () => {
+const InternationalProduct: React.FC = () => {
     const products = useSelector((state: RootState) => state.products.getProductImageRandom);
     const navigate = useNavigate();
     return (
@@ -15,16 +11,9 @@ const InternationalProduct: React.FC<Props> = () => {
                 <h2 className="text-lg font-semibold mb-3">
                     International top sellers in Kitchen
                 </h2>
-
-                <div className="relative group"
-                >
+                <div className="relative group">
                     <div
-                        className="
-          flex overflow-x-auto space-x-4 
-          custom-scroll transition-all duration-300 
-          pb-3
-        "
-                    >
+                        className="flex overflow-x-auto space-x-4 custom-scroll transition-all duration-300 pb-3">
                         {products.map((item, index) => (
                             <img
                                 key={index}
@@ -38,10 +27,6 @@ const InternationalProduct: React.FC<Props> = () => {
                 </div>
             </div>
         </div>
-
-
-
     );
 };
-
 export default InternationalProduct;
