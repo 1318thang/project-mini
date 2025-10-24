@@ -80,11 +80,11 @@ const Home: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [latesRes, allRes] = await Promise.allSettled([
+                const [] = await Promise.allSettled([
                     fetchProductImageRandom(),
                     fetchProducts(page)
                 ]);
-                console.log(latesRes + " - " + allRes)
+                // console.log(latesRes + " - " + allRes)
             } catch (err) {
                 console.error("❌ Lỗi bất ngờ:", err);
             }

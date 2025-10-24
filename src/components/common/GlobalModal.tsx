@@ -7,17 +7,15 @@ import type { RootState } from "../../redux/store";
 const GlobalModal: React.FC = () => {
     const dispatch = useDispatch();
     const { showModal, modalPage } = useSelector((state: RootState) => state.ui);
-
     const [show, setShow] = useState(false);
     const [page, setPage] = useState<"login" | "register" | null>(null);
-
     useEffect(() => {
         if (showModal) {
             setPage(modalPage);
             setShow(true);
         }
     }, [showModal, modalPage]);
-    console.log("open = " + closeModal().type);
+    // console.log("open = " + closeModal().type);
     return (
         <ModalDaisy
             open={show}

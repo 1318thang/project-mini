@@ -43,7 +43,7 @@ const SearchResult: React.FC<Props> = () => {
             const data = await ProRepository.searchProByName(keyword!, filtersFromChild);
             dispatch(getSearchPro(data));
             setQuantityFind(data.length)
-            console.log("data search: ", data);
+            // console.log("data search: ", data);
             return data;
         } catch (error) {
 
@@ -52,7 +52,7 @@ const SearchResult: React.FC<Props> = () => {
     const handleFiltersChange = (filters: any) => {
         // Ở đây bạn có thể gọi API hoặc dispatch redux để lọc sản phẩm
         setFiltersFromChild(filters.selectedOptions); // Lưu lại nếu cần sử dụng sau
-        console.log("Filters từ component FilterInfo  gửi lên:", filtersFromChild);
+        // console.log("Filters từ component FilterInfo  gửi lên:", filtersFromChild);
 
     };
     useEffect(() => {

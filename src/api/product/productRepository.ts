@@ -3,11 +3,11 @@ import type { productType } from "../../type/productType";
 import { ProService } from "./productService";
 export const ProRepository = {
     async getProsLate(param?: { search: string, page?: number }): Promise<productType[]> {
-        const start = performance.now(); // hoặc Date.now()
+        // const start = performance.now(); // hoặc Date.now()
         const data: productType[] = await ProService.getLatePro(param); // ✅ sửa lại ở đây
-        const end = performance.now();
-        const seconds = ((end - start) / 1000).toFixed(2); // chuyển ms → giây
-        console.log(`⏱ Thời gian lấy dữ liệu ProductLate: ${seconds} giây`);
+        // const end = performance.now();
+        // const seconds = ((end - start) / 1000).toFixed(2); // chuyển ms → giây
+        // console.log(`⏱ Thời gian lấy dữ liệu ProductLate: ${seconds} giây`);
         return data.map(pro => ({
             ...pro,
             name: pro.name.toLowerCase()
@@ -28,11 +28,11 @@ export const ProRepository = {
         }));
     },
     async getProsAll(param?: { search: string, page?: number }): Promise<productType[]> {
-        const start = performance.now(); // hoặc Date.now()
+        // const start = performance.now(); // hoặc Date.now()
         const data: productType[] = await ProService.getAllPro(param);
-        const end = performance.now();
-        const seconds = ((end - start) / 1000).toFixed(2); // chuyển ms → giây
-        console.log(`⏱ Thời gian lấy dữ liệu ProductAll: ${seconds} giây`);
+        // const end = performance.now();
+        // const seconds = ((end - start) / 1000).toFixed(2); // chuyển ms → giây
+        // console.log(`⏱ Thời gian lấy dữ liệu ProductAll: ${seconds} giây`);
         return data.map(pro => ({
             ...pro,
             name: pro.name.toLowerCase()
@@ -84,9 +84,7 @@ export const ProRepository = {
         try {
             const formData = new FormData();
             files.forEach(file => formData.append("files", file)); // "files" trùng param backend
-
             const updatedProduct = await ProService.AddProImage(id, formData);
-
             return {
                 ...updatedProduct,
                 name: updatedProduct.name.toLowerCase()
@@ -99,7 +97,7 @@ export const ProRepository = {
     async ValueFilterProductsByAttributes(keyword: string): Promise<attributeValueFilterType[]> {
         try {
             const data = await ProService.GetValueFilterProductsByAttributes(keyword);
-            console.log(data);
+            // console.log(data);
             return data;
         } catch (e: any) {
             console.error("get value of attribute failed:", e.response?.data || e.message);
@@ -110,7 +108,7 @@ export const ProRepository = {
     async GetProductImageRandom(maxProductNumber: number): Promise<productType[]> {
         try {
             const data = await ProService.GetProductImageRandom(maxProductNumber);
-            console.log("random repository = " + data);
+            // console.log("random repository = " + data);
             return data;
         } catch (e: any) {
             console.error("get data failed:", e.response?.data || e.message);

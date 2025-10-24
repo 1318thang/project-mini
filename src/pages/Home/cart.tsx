@@ -84,7 +84,6 @@ const Cart: React.FC = () => {
             dispatch(setLoading(false));      // tắt skeleton
         }
     }
-
     const updateCartById = async (data: cartItemType): Promise<void> => {
         try {
             dispatch(setLoading(true)); // ✅ Dùng Redux loading
@@ -104,7 +103,7 @@ const Cart: React.FC = () => {
     const fetchProductDeals = useCallback(async (key: string, max: number) => {
         try {
             const data = await ProRepository.GetProductImageRandom(max);
-            console.log("random =", data);
+            // console.log("random =", data);
             // dispatch(getProductsImageRandom(data));
             dispatch(setTrend({ key, data })); // ✅ Lưu dữ liệu theo key
         } catch (e) {

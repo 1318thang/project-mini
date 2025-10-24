@@ -21,13 +21,10 @@ const ProductCarousel: React.FC<Props> = ({ page, setPage, trendKey, title, page
     const producttrend = useSelector(
         (state: RootState) => state.products.trends[trendKey] || []
     );
-
     // ✅ Tự động tính số trang theo số lượng sản phẩm thật
     const totalPages = Math.ceil(producttrend.length / pageSize);
-
     // ✅ Lấy sản phẩm hiển thị theo từng trang
     const visibleProducts = producttrend.slice(page * pageSize, (page + 1) * pageSize);
-
     return (
         <div id="product" className="relative px-5">
             <div>

@@ -18,12 +18,12 @@ const PageProduct: React.FC<Props> = () => {
     const dispatch = useDispatch();
     const [product, setProduct] = useState<productType[]>([]);
     const [currentCategory, setCurrentCategory] = useState<string>(""); // group hiện tại
-    console.log(product + "" + loading + "" + error);
+    console.log(product.toString + "" + loading + "" + error);
     const productAll = async (): Promise<productType[]> => {
         try {
             setLoading(true);
             const data = await ProRepository.getProsAll();
-            console.log("productAll: ", data);
+            // console.log("productAll: ", data);
             dispatch(getAllProducts(data));
             setProduct(data);
             return data;
@@ -44,7 +44,7 @@ const PageProduct: React.FC<Props> = () => {
             setLoading(true);
             const getdata = await ProRepository.getProsLate();
             // dispatch slice với mảng
-            console.log("productLates : ", getdata);
+            // console.log("productLates : ", getdata);
             dispatch(getProductLasted(getdata));
 
             return getdata;
@@ -80,13 +80,13 @@ const PageProduct: React.FC<Props> = () => {
         let isMounted = true;
         const handleReceiveProduct = (newProduct: productType) => {
             if (!isMounted) return;
-            console.log("📩 Nhận sản phẩm mới:", newProduct);
+            // console.log("📩 Nhận sản phẩm mới:", newProduct);
             setProduct(prev => [...prev, newProduct]);
             dispatch(createProduct(newProduct));
         };
         const init = async () => {
             try {
-                console.log("🚀 Khởi tạo SignalR và tải dữ liệu...");
+                // console.log("🚀 Khởi tạo SignalR và tải dữ liệu...");
                 // 1️⃣ Kết nối SignalR
                 await signalRService.start();
                 // 2️⃣ Đăng ký listener
@@ -113,7 +113,7 @@ const PageProduct: React.FC<Props> = () => {
         init();
         // 4️⃣ Cleanup — tránh leak kết nối và state
         return () => {
-            console.log("🧹 Cleanup SignalR và listener...");
+            // console.log("🧹 Cleanup SignalR và listener...");
             isMounted = false;
             signalRService.off("ReviceProduct", handleReceiveProduct);
             signalRService.stop();

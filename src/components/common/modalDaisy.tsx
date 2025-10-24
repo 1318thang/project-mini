@@ -43,18 +43,11 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
                 message: "Login successful"
             }));     // ✅ lưu vào Redux luôn
             // 🔹 Redirect trước
-            var _accessToken = localStorage.getItem("accessToken");
-            var _refreshToken = localStorage.getItem("refreshToken");
+
             var userString = localStorage.getItem("user");
             if (userString) {
-                const user = JSON.parse(userString); // chuyển lại thành object
-                console.log(user.email); // 👉 "dat@gmail.com"
-                console.log(user.role);  // 👉 "User"
-                console.log(user.id);    // 👉 4
+                // const user = JSON.parse(userString); // chuyển lại thành object
             }
-            console.log("_refresherToken: " + _refreshToken);
-            console.log("_accessToken: " + _accessToken);
-            console.log("User info: ", res.user.email, res.user.Role, res.user.id);
             if (res.user.Role != null) {
                 const userRole = res.user.Role;
                 if (userRole === "Admin") navigate("/dashboard");

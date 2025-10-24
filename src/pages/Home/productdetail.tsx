@@ -39,7 +39,7 @@ const ProductDetail: React.FC = () => {
             console.log(loading);
             const getdata = await ProRepository.getProId(Number(id));
             // dispatch slice với mảng
-            console.table(getdata);
+            // console.table(getdata);
             dispatch(getId(getdata));
             return getdata;
         } catch (e) {

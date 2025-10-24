@@ -33,7 +33,6 @@ httpClient.interceptors.response.use(
         if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
             const refreshToken = localStorage.getItem("refreshToken");
-
             if (!refreshToken) {
                 console.warn("⚠️ Refresh token missing → logout");
                 window.location.href = "#/login"; // hoặc dispatch logout
@@ -46,7 +45,6 @@ httpClient.interceptors.response.use(
                 const res = await axios.post("https://bold-wind-c8e3.1318thang.workers.dev/api/Auth/refresh-token", {
                     refreshToken,
                 });
-
                 const newAccessToken = (res.data as any).accessToken;
                 localStorage.setItem("accessToken", newAccessToken);
                 // Cập nhật header cũ
