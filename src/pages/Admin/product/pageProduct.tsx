@@ -76,8 +76,9 @@ const PageProduct: React.FC<Props> = () => {
     useEffect(() => {
         let isMounted = true;
         const handleReceiveProduct = (newProduct: productType) => {
+            console.log("hello word");
             if (!isMounted) return;
-            // console.log("📩 Nhận sản phẩm mới:", newProduct);
+            console.log("📩 Nhận sản phẩm mới:", newProduct);
             setProduct(prev => [...prev, newProduct]);
             dispatch(createProduct(newProduct));
         };

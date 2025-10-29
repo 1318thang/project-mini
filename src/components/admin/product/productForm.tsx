@@ -71,15 +71,15 @@ const ProductForm: React.FC<Props> = ({ onCreate }) => {
     }
     const getAllAttributeCategory = async (categoryName: string) => {
         try {
-            console.log(categoryName);
+            // console.log(categoryName);
             if (!categoryName || categoryName.trim() === "") {
                 console.warn("CategoryName is empty, API call skipped");
                 return [];
             }
             categoryName = categoryName.trim();
-            console.log("dat nè " + categoryName);
+            // console.log("dat nè " + categoryName);
             var data = await CategoryRepository.getCategoryAttribute(categoryName);
-            console.log(data)
+            // console.log(data)
             dispatch(getCategoryAttribute(data));
             return data?.map((attr: any) => attr.Name) || []; // đảm bảo luôn là string[]
         } catch (e: any) {
@@ -136,14 +136,13 @@ const ProductForm: React.FC<Props> = ({ onCreate }) => {
             if (attr) {
                 // clone array value hiện tại để tránh mutate trực tiếp
                 const values = [...attr.value];
-
-                console.log("remove = " + remove);
-                console.log("newValue = " + newValue);
+                // console.log("remove = " + remove);
+                // console.log("newValue = " + newValue);
                 if (remove && newValue === null) {
                     values.splice(index, 1);
                 } else if (newValue !== null) {
-                    console.log("index = " + index);
-                    console.log("values.length = " + values.length)
+                    // console.log("index = " + index);
+                    // console.log("values.length = " + values.length)
                     if (index >= values.length) {
                         values.push(newValue);
                     } else {
