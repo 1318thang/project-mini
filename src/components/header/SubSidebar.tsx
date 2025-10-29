@@ -17,7 +17,7 @@ const SubSidebar: React.FC<SubSidebarProps> = ({
     const subMenuMap: Record<string, { label: string; path: string }[]> = {
         Infomation: [
             { label: "Product", path: "/product" },
-            { label: "Color", path: "/colorPro" },
+            { label: "Category", path: "/colorPro" },
             { label: "Size", path: "/sizePro" },
         ],
         dashboard: [{ label: "Overview", path: "/dashboard" }],
