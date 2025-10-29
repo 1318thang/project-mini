@@ -3,7 +3,7 @@ import ProductTable from '../../../components/admin/product/productTable';
 import ProductForm from '../../../components/admin/product/productForm';
 import ProductFilter from '../../../components/admin/product/productFilter';
 import { useDispatch } from 'react-redux';
-import type { productType } from '../../../type/productType';
+import type { productType } from '../../../type/product/productType';
 import { ProRepository } from '../../../api/product/productRepository';
 import { createProduct, getAllProducts, getProductLasted } from '../../../redux/product/productSlice';
 import { signalRService } from '../../../api/signalR/signalRService';

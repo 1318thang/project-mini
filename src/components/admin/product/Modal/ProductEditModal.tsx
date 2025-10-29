@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { productType } from "../../../../type/productType";
+import type { productType } from "../../../../type/product/productType";
 import { ProRepository } from "../../../../api/product/productRepository";
 import type {
     // SecondaryImage,

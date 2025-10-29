@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../../redux/store";
-import type { productType } from "../../../type/productType";
+import type { productType } from "../../../type/product/productType";
 import { FileText } from "lucide-react";
 import Modal from "../../common/modal";
 import { signalRService } from "../../../api/signalR/signalRService";

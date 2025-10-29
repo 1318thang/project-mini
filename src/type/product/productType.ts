@@ -1,6 +1,4 @@
-
-import type { ProductAttributeValuesType } from "./productAttributesValue/ProductAttributesValuesType";
-
+import type { ProductAttributeValuesType } from "../productAttributesValue/ProductAttributesValuesType";
 export interface productType {
     id: number;
     name: string;

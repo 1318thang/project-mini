@@ -11,7 +11,7 @@ import {
     // useSelector 
 } from "react-redux";
 // import type { RootState } from "../../redux/store";
-import type { productType } from "../../type/productType";
+import type { productType } from "../../type/product/productType";
 import { ProRepository } from "../../api/product/productRepository";
 import {
     getId,

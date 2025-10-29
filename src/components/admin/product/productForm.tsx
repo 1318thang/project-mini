@@ -7,7 +7,7 @@ import {
     type SelectChangeEvent,
 
 } from "@mui/material";
-import type { productType } from '../../../type/productType';
+import type { productType } from '../../../type/product/productType';
 import Introduction from "../../../components/admin/product/InfoComponent/Introduction";
 import Decription from "../../../components/admin/product/InfoComponent/Decription";
 import Attribute from "../../../components/admin/product/InfoComponent/Attribute";
@@ -18,6 +18,7 @@ import { getAllCategories, getCategoryAttribute } from '../../../redux/category/
 import type { categoryAttributesType } from '../../../type/categoryAttribute/categoryAttribute';
 import type { attributesType } from '../../../type/attribute/AttributeType';
 import type { ProductAttributeValuesType } from '../../../type/productAttributesValue/ProductAttributesValuesType';
+
 interface Props {
     // onCreate: (data: Omit<productType, "id">) => Promise<void>;
     onCreate: (data: FormData) => Promise<void>;
@@ -130,7 +131,7 @@ const ProductForm: React.FC<Props> = ({ onCreate }) => {
             const attributes = prev.productAttributeValues ?? [];
 
             // Tìm attribute hiện tại
-            const attr = attributes.find(a => a.attributeId === Number(attrId));
+            const attr = attributes.find((a: any) => a.attributeId === Number(attrId));
 
             if (attr) {
                 // clone array value hiện tại để tránh mutate trực tiếp
@@ -155,7 +156,7 @@ const ProductForm: React.FC<Props> = ({ onCreate }) => {
                 // trả về state mới clone toàn bộ mảng
                 return {
                     ...prev,
-                    productAttributeValues: attributes.map(a =>
+                    productAttributeValues: attributes.map((a: ProductAttributeValuesType) =>
                         a.attributeId === attrId ? updatedAttr : { ...a }
                     ),
                 };
