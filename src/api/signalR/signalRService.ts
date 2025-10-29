@@ -1,10 +1,15 @@
-import { HubConnection, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+import { HttpTransportType, HubConnection, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 class SignalRService {
     private connection: HubConnection | null = null;
     public start() {
         this.connection = new HubConnectionBuilder()
             // .withUrl("https://localhost:7140/productHub")
-            .withUrl("https://bold-wind-c8e3.1318thang.workers.dev/productHub") // URL backend
+            // .withUrl("https://bold-wind-c8e3.1318thang.workers.dev/productHub") // URL backend
+            .withUrl("https://bold-wind-c8e3.1318thang.workers.dev/productHub", {
+                skipNegotiation: true, // ⚡ Bỏ qua negotiate
+                transport: HttpTransportType.WebSockets, // ⚡ Ép dùng WebSocket
+                withCredentials: true, // ⚡ Quan trọng nếu backend yêu cầu cookie/session
+            })
             .withAutomaticReconnect()
             .configureLogging(LogLevel.Debug)
             .build();
