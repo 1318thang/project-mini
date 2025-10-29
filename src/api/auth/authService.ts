@@ -90,8 +90,14 @@ export const authService = {
                 Password: data.password,
                 Role: data.role ?? "User"
             };
-            const res = await httpClient.post<RegisterResponseType>("Auth/register", payload);
-            return res.data;
+            // const res = await httpClient.post<RegisterResponseType>("Auth/register", payload);
+            // const res = await httpClient.post<RegisterResponseType>("Auth/register", payload);
+            const res = (await httpClient.post<RegisterResponseType>(
+                "Auth/register",
+                payload
+            )) as unknown as RegisterResponseType;
+            console.log("📦 Response từ backend:", res); // <- sẽ thấy { success: true, message: "..." }
+            return res;
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 console.error("🚫 Error when register:", error.response?.data || error.message);

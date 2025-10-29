@@ -1,5 +1,6 @@
 import type { attributeValueFilterType } from "../../type/attribute/AttributeValueFilterType";
-import type { productType } from "../../type/productType";
+import type { ProductAttributeResultType } from "../../type/product/ProductAttributeResultType";
+import type { productType } from "../../type/product/productType";
 import { ProService } from "./productService";
 export const ProRepository = {
     async getProsLate(param?: { search: string, page?: number }): Promise<productType[]> {
@@ -57,7 +58,6 @@ export const ProRepository = {
             throw new Error("Create product failed");
         }
     },
-
     async updatePro(id: number, data: Partial<productType>): Promise<productType> {
         try {
             const updatedPro = await ProService.updatePro(id, data);
@@ -116,5 +116,14 @@ export const ProRepository = {
 
         }
     },
-
+    async getProductsByCategoryAndAttribute(categoryName: string, attribute: string): Promise<ProductAttributeResultType[]> {
+        try {
+            const response = await ProService.GetProductsByCategoryAndAttribute(categoryName, attribute);
+            console.log("response (chi tiết) =", JSON.stringify(response, null, 2));
+            return response;
+        } catch (error) {
+            console.error("[cateRepository] getProductsByCategoryAndAttribute Error:", error);
+            throw error;
+        }
+    },
 }

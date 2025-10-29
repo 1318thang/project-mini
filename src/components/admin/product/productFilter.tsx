@@ -5,7 +5,7 @@ import type { productType } from "../../../type/productType";
 import { FileText } from "lucide-react";
 import Modal from "../../common/modal";
 import { signalRService } from "../../../api/signalR/signalRService";
-import { createProduct } from "../../../redux/productSlice";
+import { createProduct } from "../../../redux/product/productSlice";
 import ShowImages from "./Modal/ShowImages";
 import ProductEditInfoModal from "./Modal/ProductEditInfoModal";
 import ProductEditModal from "./Modal/ProductEditModal";

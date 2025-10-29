@@ -9,14 +9,10 @@ import { useParams } from 'react-router-dom';
 import { ProRepository } from '../../api/product/productRepository';
 import SearchInfo from '../../components/home/search/SearchInfo';
 import { useDispatch } from 'react-redux';
-import { getFilterProductsByAttributes, getSearchPro } from '../../redux/productSlice';
+import { getFilterProductsByAttributes, getSearchPro } from '../../redux/product/productSlice';
 import FilterInfo from '../../components/home/search/FilterInfo';
 import ListInfo from '../../components/home/search/listInfo';
-interface Props {
-
-}
-
-const SearchResult: React.FC<Props> = () => {
+const SearchResult: React.FC = () => {
     const { keyword } = useParams<{ keyword: string }>();
     console.log("keyword = " + keyword);
     const [view, setView] = useState("grid");
@@ -51,8 +47,9 @@ const SearchResult: React.FC<Props> = () => {
     }
     const handleFiltersChange = (filters: any) => {
         // Ở đây bạn có thể gọi API hoặc dispatch redux để lọc sản phẩm
-        setFiltersFromChild(filters.selectedOptions); // Lưu lại nếu cần sử dụng sau
-        // console.log("Filters từ component FilterInfo  gửi lên:", filtersFromChild);
+        // setFiltersFromChild(filters.selectedOptions); // Lưu lại nếu cần sử dụng sau
+        setFiltersFromChild(filters);
+        console.log("Filters từ component FilterInfo  gửi lên:", filtersFromChild);
 
     };
     useEffect(() => {

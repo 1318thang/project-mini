@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sidebarReducer from "./sidebarSlice";
-import productReduces from "./productSlice";
+import productReduces from "./product/productSlice";
 import cartReduces from "./cartSlice";
 import authReduces from "./authSlice";
 import uiReduces from "./uiSlice";
-import categoriesReduces from "./categorySlice";
+import categoriesReduces from "./category/categorySlice";
 import languageReducer from "./languageSlice";
+import productAttributeValueReducer from "./productAttributeValue/productAttributeValueSlice";
 export const store = configureStore({
     reducer: {
         sidebar: sidebarReducer,
@@ -15,6 +16,7 @@ export const store = configureStore({
         ui: uiReduces,
         categories: categoriesReduces,
         language: languageReducer, // ✅ thêm dòng này
+        productAttributeValue: productAttributeValueReducer,
     },
 });
 export type RootState = ReturnType<typeof store.getState>;

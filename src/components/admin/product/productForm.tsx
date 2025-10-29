@@ -14,7 +14,7 @@ import Attribute from "../../../components/admin/product/InfoComponent/Attribute
 import Image from "../../../components/admin/product/InfoComponent/ImageForm";
 import { CategoryRepository } from "../../../api/categoryAttributes/categoryRepository";
 import { useDispatch } from 'react-redux';
-import { getAllCategories, getCategoryAttribute } from '../../../redux/categorySlice';
+import { getAllCategories, getCategoryAttribute } from '../../../redux/category/categorySlice';
 import type { categoryAttributesType } from '../../../type/categoryAttribute/categoryAttribute';
 import type { attributesType } from '../../../type/attribute/AttributeType';
 import type { ProductAttributeValuesType } from '../../../type/productAttributesValue/ProductAttributesValuesType';

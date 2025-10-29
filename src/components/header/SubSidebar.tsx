@@ -5,7 +5,7 @@ interface SubSidebarProps {
     parentKey: string;
     onClose: () => void;
     navigate: (path: string) => void;
-    onNavigateFromSubSidebar?: () => void; // ✅ thêm prop mới
+    onNavigateFromSubSidebar?: () => void;
 }
 
 const SubSidebar: React.FC<SubSidebarProps> = ({
@@ -20,26 +20,26 @@ const SubSidebar: React.FC<SubSidebarProps> = ({
             { label: "Color", path: "/colorPro" },
             { label: "Size", path: "/sizePro" },
         ],
-        dashboard: [{ label: "digram", path: "/dashboard" }],
+        dashboard: [{ label: "Overview", path: "/dashboard" }],
     };
 
     const subMenus = subMenuMap[parentKey] || [];
+
     const handleSubItemClick = (path: string) => {
-        // ✅ Báo cho Sidebar biết: “đây là click từ SubSidebar”
         if (onNavigateFromSubSidebar) onNavigateFromSubSidebar();
-
-        // ✅ Điều hướng tới trang con
         navigate(path);
-
-        // ❌ KHÔNG đóng ngay lập tức
-        // Nếu bạn vẫn muốn sidebar con đóng sau khi navigate xong, có thể thêm:
-        // setTimeout(onClose, 300);
     };
+
     return (
-        <aside className="w-40 md:w-60 bg-gray-50 border-l h-screen p-4 shadow-lg transition-all duration-300">
-            <div className="flex justify-between items-center mb-4">
-                <h3 className="font-semibold text-gray-700 capitalize">{parentKey}</h3>
-                <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+        <aside className="w-56 md:w-64 bg-gray-50 border-l h-full p-5 shadow-md transition-all duration-300">
+            <div className="flex justify-between items-center mb-6">
+                <h3 className="font-semibold text-gray-700 text-lg capitalize">
+                    {parentKey}
+                </h3>
+                <button
+                    onClick={onClose}
+                    className="text-gray-500 hover:text-blue-600 transition"
+                >
                     <FaChevronLeft />
                 </button>
             </div>
@@ -48,11 +48,7 @@ const SubSidebar: React.FC<SubSidebarProps> = ({
                 {subMenus.map((item, index) => (
                     <li
                         key={index}
-                        className="p-2 rounded-md hover:bg-blue-100 cursor-pointer text-gray-700"
-                        // onClick={() => {
-                        //     // onClose(); // đóng ngay lập tức
-                        //     setTimeout(() => navigate(item.path), 100);
-                        // }}
+                        className="p-2 rounded-lg hover:bg-blue-100 cursor-pointer text-gray-700 hover:text-blue-700 transition"
                         onClick={() => handleSubItemClick(item.path)}
                     >
                         {item.label}

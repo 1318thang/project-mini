@@ -15,7 +15,7 @@ import Cart from './pages/Home/cart'
 import Dashboard from './pages/Admin/dashboard'
 import PageProduct from './pages/Admin/product/pageProduct'
 import PageSize from './pages/Admin/size/pageSize'
-import PageColor from './pages/Admin/color/pageColor'
+import CategorySelector from './pages/Admin/color/CategorySelector'
 import NotFoundPage from './pages/notfound'
 import AppLayoutAdmin from './layouts/admin/AppLayoutAdmin'
 import UserProfile from './pages/Admin/userprofile'
@@ -43,10 +43,9 @@ function App() {
         <Route element={<ProtectedRoute requiredRole="Admin"><AppLayoutAdmin /></ProtectedRoute>}>
           <Route index path="dashboard" element={<Dashboard />} />
           <Route path='product' element={<PageProduct />} />
-          <Route path='colorPro' element={<PageColor />} />
+          <Route path='colorPro' element={<CategorySelector />} />
           <Route path='sizePro' element={<PageSize />} />
           <Route path='userprofile' element={<UserProfile />} />
-
         </Route>
         {/* Trang 404 */}
         <Route path="*" element={<NotFoundPage />} />

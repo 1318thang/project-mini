@@ -22,6 +22,28 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [loginData, setLoginData] = useState<LoginResponseType | null>(null);
+    const [password, setPassword] = useState("");
+    const [passwordStrength, setPasswordStrength] = useState(0);
+    const [passwordStatus, setPasswordStatus] = useState("");
+
+    // ✅ Hàm đánh giá độ mạnh của mật khẩu
+    const checkPasswordStrength = (pwd: string) => {
+        let score = 0;
+        if (!pwd) return 0;
+
+        if (pwd.length >= 8) score++;
+        if (/[A-Z]/.test(pwd)) score++;
+        if (/[a-z]/.test(pwd)) score++;
+        if (/[0-9]/.test(pwd)) score++;
+        if (/[^A-Za-z0-9]/.test(pwd)) score++;
+
+        // score tối đa là 5
+        setPasswordStrength(score);
+
+        if (score <= 2) setPasswordStatus("Yếu 😓");
+        else if (score === 3 || score === 4) setPasswordStatus("Trung bình 🙂");
+        else if (score === 5) setPasswordStatus("Mạnh 💪");
+    };
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
@@ -64,6 +86,11 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
     }
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        // ✅ Kiểm tra mật khẩu đủ mạnh chưa
+        if (passwordStrength < 4) {
+            alert("Mật khẩu chưa đủ mạnh! Vui lòng thêm chữ hoa, số hoặc ký tự đặc biệt.");
+            return;
+        }
         setLoading(true);
         setError("");
 
@@ -71,7 +98,10 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
             const name = (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value;
             const email = (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value;
             const password = (e.currentTarget.elements.namedItem("password") as HTMLInputElement).value;
+            console.log("đang chờ phản hồi ...");
             const res = await authService.register({ name, email, password });
+            console.log("📦 Response from backend:", res); // 👈 kiểm tra ở đây
+
             if (res.success) {
                 alert("Register successful! You can now login.");
                 switchMode("login");
@@ -192,11 +222,55 @@ const ModalDaisy: React.FC<ModalProps> = ({ open, onClose, page }) => {
                             </div>
                             <br />
                             <form onSubmit={handleRegister}>
-                                <input type="text" name="name" placeholder="Họ và tên" className="w-full border rounded px-3 py-2 mb-3" />
-                                <input type="email" name="email" placeholder="Email" className="w-full border rounded px-3 py-2 mb-3" />
-                                <input type="password" name="password" placeholder="Mật khẩu" className="w-full border rounded px-3 py-2 mb-3" />
-                                <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded">
-                                    {loading ? "Registering.." : "Sign Up"}
+                                <input type="text" name="name" placeholder="Họ và tên"
+                                    className="w-full border rounded px-3 py-2 mb-3" />
+                                <input type="email" name="email" placeholder="Email"
+                                    className="w-full border rounded px-3 py-2 mb-3" />
+
+                                {/* ✅ Input password + Strength bar */}
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Mật khẩu"
+                                    className="w-full border rounded px-3 py-2 mb-1"
+                                    value={password}
+                                    onChange={(e) => {
+                                        setPassword(e.target.value);
+                                        checkPasswordStrength(e.target.value);
+                                    }}
+                                />
+
+                                {/* Thanh trạng thái */}
+                                <div className="h-2 w-full bg-gray-200 rounded mb-2">
+                                    <div
+                                        className={`h-full rounded transition-all duration-300 
+                                ${passwordStrength <= 2
+                                                ? "bg-red-500 w-1/4"
+                                                : passwordStrength === 3
+                                                    ? "bg-yellow-500 w-2/4"
+                                                    : passwordStrength === 4
+                                                        ? "bg-blue-500 w-3/4"
+                                                        : "bg-green-500 w-full"
+                                            }`}
+                                    ></div>
+                                </div>
+
+                                {/* Text trạng thái */}
+                                <p className={`text-sm mb-3 ${passwordStrength <= 2 ? "text-red-600" : passwordStrength === 3 ? "text-yellow-600" : "text-green-600"}`}>
+                                    {password ? `Độ mạnh: ${passwordStatus}` : ""}
+                                </p>
+
+                                {/* ✅ Disable nút nếu mật khẩu yếu */}
+                                <button
+                                    className={`w-full py-2 rounded text-white transition-all duration-300 
+                            ${passwordStrength < 4
+                                            ? "bg-gray-400 cursor-not-allowed"
+                                            : "bg-green-500 hover:bg-green-600"
+                                        }`}
+                                    type="submit"
+                                    disabled={passwordStrength < 4 || loading}
+                                >
+                                    {loading ? "Registering..." : "Sign Up"}
                                 </button>
                             </form>
                             <p className="mt-3 text-sm text-center">

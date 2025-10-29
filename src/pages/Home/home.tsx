@@ -4,7 +4,7 @@ import PromotionSection from "../../components/home/PromotionSection";
 import SectionTitle from "../../components/home/SectionTitle";
 import ProductGrid from "../../components/home/ProductGrid";
 import { ProRepository } from "../../api/product/productRepository";
-import { getProductHome, getProductsImageRandom, setLoading } from "../../redux/productSlice";
+import { getProductHome, getProductsImageRandom, setLoading } from "../../redux/product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
 import GroupProduct from "../../components/home/groupProduct";

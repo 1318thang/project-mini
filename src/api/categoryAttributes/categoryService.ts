@@ -6,5 +6,7 @@ export const cateService = {
         apiService.get<categoryAttributesType[]>("/Admin/categories", { params }),
     getCategoryAttributes: (categoryName: string | undefined, params?: any): Promise<attributesType[]> =>
         apiService.get<attributesType[]>(`/Admin/categories/${categoryName}/attributes`, { params }),
+    getCategoryAttributesJson: (): Promise<string> =>
+        apiService.get<string>("/Admin/categories/attributes"),
 
 }

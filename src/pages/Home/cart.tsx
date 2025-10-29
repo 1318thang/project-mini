@@ -12,7 +12,7 @@ import { ProRepository } from "../../api/product/productRepository";
 import {
     // getProductsImageRandom, 
     setTrend
-} from "../../redux/productSlice";
+} from "../../redux/product/productSlice";
 
 // const product = Array.from({ length: 21 }, (_, i) => ({
 //     id: i + 1,

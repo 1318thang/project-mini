@@ -5,6 +5,7 @@ import { FaBox, FaTachometerAlt } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SubSidebar from "./SubSidebar";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Sidebar: React.FC = () => {
     const location = useLocation();
@@ -13,10 +14,11 @@ const Sidebar: React.FC = () => {
     const { isExpanded, activeItem } = useSelector(
         (state: RootState) => state.sidebar
     );
+
     const [activeParent, setActiveParent] = useState<string | null>(null);
-    // ✅ Bộ đếm thời gian theo dõi hành vi người dùng
     const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
-    const ignoreNextRouteChange = useRef(false); // ✅ cờ kiểm soát việc đóng sidebar
+    const ignoreNextRouteChange = useRef(false);
+
     const menuItems = [
         { key: "dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
         { key: "Infomation", label: "Item", icon: <FaBox /> },
@@ -24,7 +26,6 @@ const Sidebar: React.FC = () => {
 
     const handleParentClick = (item: any) => {
         dispatch(setActiveItem(item.key));
-        // Khi người dùng click → reset lại timer
         resetInactivityTimer();
         if (item.path) {
             navigate(item.path);
@@ -33,33 +34,28 @@ const Sidebar: React.FC = () => {
             setActiveParent((prev) => (prev === item.key ? null : item.key));
         }
     };
-    // ✅ Reset hoặc khởi tạo lại bộ đếm 20 giây
+
     const resetInactivityTimer = () => {
         if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
-
         inactivityTimer.current = setTimeout(() => {
-            setActiveParent(null); // 🔥 Auto đóng sidebar con sau 20 giây
-        }, 20000); // 20 giây
+            setActiveParent(null);
+        }, 20000);
     };
-    // 🔥 Đảm bảo sidebar con đóng khi đổi route
+
     useEffect(() => {
         if (ignoreNextRouteChange.current) {
-            ignoreNextRouteChange.current = false; // bỏ qua lần đổi route này
+            ignoreNextRouteChange.current = false;
             return;
         }
         setActiveParent(null);
     }, [location.pathname]);
-    // ✅ Theo dõi hành vi người dùng (di chuột hoặc click)
+
     useEffect(() => {
         if (activeParent) {
             resetInactivityTimer();
-
             const handleUserActivity = () => resetInactivityTimer();
-
-            // Theo dõi hành vi trong toàn sidebar
             window.addEventListener("mousemove", handleUserActivity);
             window.addEventListener("click", handleUserActivity);
-
             return () => {
                 window.removeEventListener("mousemove", handleUserActivity);
                 window.removeEventListener("click", handleUserActivity);
@@ -68,48 +64,55 @@ const Sidebar: React.FC = () => {
         }
     }, [activeParent]);
 
-
-    // ✅ Callback nhận tín hiệu từ SubSidebar
     const handleNavigateFromSubSidebar = () => {
         ignoreNextRouteChange.current = true;
     };
-    return (
 
-        <div className="flex">
+    return (
+        <div className="flex h-screen bg-gray-50">
+            {/* Sidebar cha */}
             <aside
-                className={`${isExpanded ? "w-14 text-[10px] md:w-34 md:text-[15px]" : "w-15"
-                    } bg-white shadow-md h-screen transition-all duration-300 flex flex-col border-r`}
+                className={`${isExpanded ? "w-60" : "w-20"}
+        bg-white shadow-md border-r h-full flex flex-col transition-all duration-300`}
             >
-                <nav className="flex-1 p-2 space-y-1">
+                <div className="flex-1 p-3 space-y-2">
                     {menuItems.map((item) => (
                         <div
                             key={item.key}
-                            className={`flex flex-col items-center gap-3 p-2 rounded-md cursor-pointer transition
-                    ${activeItem === item.key
-                                    ? "bg-blue-50 text-blue-600 border-l-4 border-blue-500"
-                                    : "text-gray-700 hover:bg-gray-100"
+                            className={`flex items-center gap-3 p-2 rounded-xl cursor-pointer transition-all
+                ${activeItem === item.key
+                                    ? "bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-600"
+                                    : "hover:bg-gray-100 text-gray-700"
                                 }`}
                             onClick={() => handleParentClick(item)}
+                            title={item.label}
                         >
-                            {item.icon}
-                            {isExpanded && <span className="font-medium">{item.label}</span>}
+                            <span className="text-lg">{item.icon}</span>
+                            {isExpanded && <span>{item.label}</span>}
                         </div>
                     ))}
-                </nav>
+                </div>
             </aside>
 
             {/* Sidebar con */}
-            {activeParent && (
-                <SubSidebar
-                    parentKey={activeParent}
-                    onClose={() => setActiveParent(null)}
-                    navigate={navigate}
-                    onNavigateFromSubSidebar={handleNavigateFromSubSidebar} // ✅ truyền thêm prop này
-                />
-            )}
+            <AnimatePresence>
+                {activeParent && (
+                    <motion.div
+                        initial={{ x: 60, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: 60, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <SubSidebar
+                            parentKey={activeParent}
+                            onClose={() => setActiveParent(null)}
+                            navigate={navigate}
+                            onNavigateFromSubSidebar={handleNavigateFromSubSidebar}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
-
-
     );
 };
 

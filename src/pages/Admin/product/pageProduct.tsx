@@ -5,7 +5,7 @@ import ProductFilter from '../../../components/admin/product/productFilter';
 import { useDispatch } from 'react-redux';
 import type { productType } from '../../../type/productType';
 import { ProRepository } from '../../../api/product/productRepository';
-import { createProduct, getAllProducts, getProductLasted } from '../../../redux/productSlice';
+import { createProduct, getAllProducts, getProductLasted } from '../../../redux/product/productSlice';
 import { signalRService } from '../../../api/signalR/signalRService';
 interface Props {
 

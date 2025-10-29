@@ -1,5 +1,6 @@
 import type { attributeValueFilterType } from "../../type/attribute/AttributeValueFilterType";
-import type { productType } from "../../type/productType";
+import type { ProductAttributeResultType } from "../../type/product/ProductAttributeResultType";
+import type { productType } from "../../type/product/productType";
 import { apiService } from "../apiService";
 const AdminProUrl = "/home/products";
 const homeUrl = "/home/productshome";
@@ -12,8 +13,10 @@ export const ProService = {
     getHomePro: (params?: any): Promise<productType[]> =>
         apiService.get<productType[]>(homeUrl, { params }),
     searchProductsByName: (name: string, filter: Record<string, string[]>): Promise<productType[]> => {
-        const filterJson = encodeURIComponent(JSON.stringify(filter));
-        return apiService.get<productType[]>(`/home/search?name=${name}&filterJson=${filterJson}`);
+        return apiService.post<productType[]>(`/home/search`, {
+            name,
+            filterJson: filter
+        });
     },
     getIdPro: (id: number): Promise<productType> =>
         apiService.get<productType>(`${AdminProUrl}/${id}`),
@@ -38,5 +41,6 @@ export const ProService = {
         apiService.get<productType[]>("/home/productsRandomImage", {
             params: { maxProduct }
         }),
-
+    GetProductsByCategoryAndAttribute: (categoryName: string, attribute: string): Promise<ProductAttributeResultType[]> =>
+        apiService.get<ProductAttributeResultType[]>("/Admin/by-category", { params: { categoryName, attribute }, }),
 }

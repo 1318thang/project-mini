@@ -18,7 +18,7 @@ import {
     // getProductHome,
     //  getProductLasted,
     setTrend
-} from "../../redux/productSlice";
+} from "../../redux/product/productSlice";
 
 // const product = Array.from({ length: 21 }, (_, i) => ({
 //     id: i + 1,

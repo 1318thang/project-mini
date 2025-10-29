@@ -13,8 +13,9 @@ const FilterInfo: React.FC<Props> = ({ keyword, onFiltersChange }) => {
     // const products = useSelector((state: RootState) => state.products.resultSearch);
     const ValuesAtributes = useSelector((state: RootState) => state.products.FilterProductsByAttributes);
     const [filtersState, setFiltersState] = useState({
-        price: 28000, // giá slider mặc định
-        selectedOptions: {} as Record<string, string[]>, // lưu các checkbox được tick
+        price: 2800,
+        priceRange: { min: 3, max: 2800 },
+        selectedOptions: {} as Record<string, string[]>,
     });
     const [showAllStates, setShowAllStates] = useState<Record<string, boolean>>({});
     const toggleShowAll = (name: string) => {
@@ -23,19 +24,6 @@ const FilterInfo: React.FC<Props> = ({ keyword, onFiltersChange }) => {
             [name]: !prev[name]
         }));
     };
-    console.log("checkbox: " + filtersState.selectedOptions);
-    // lấy category từ product đầu tiên
-    // const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setFiltersState(prev => ({
-    //         ...prev, // giữ nguyên các state khác
-    //         price: Number(e.target.value) // cập nhật giá trị mới
-    //     }));
-    // };
-    const [priceRange, setPriceRange] = useState(28000);
-    console.log(setPriceRange);
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setPriceRange(Number(e.target.value));
-    // }
     const handleCheckboxChange = (title: string, option: string) => {
         setFiltersState(prev => {
             const prevOptions = prev.selectedOptions[title] || [];
@@ -60,12 +48,34 @@ const FilterInfo: React.FC<Props> = ({ keyword, onFiltersChange }) => {
             }
         });
     };
+
+    // ✅ Khi kéo input range
+    const handlePriceRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newMax = Number(e.target.value);
+        setFiltersState((prev) => ({
+            ...prev,
+            priceRange: { ...prev.priceRange, max: newMax }, // ✅ cập nhật đúng field
+        }));
+    };
+    // ✅ Khi nhấn nút Go
+    const handleApplyPriceFilter = () => {
+        if (onFiltersChange) {
+            onFiltersChange(filtersState); // Gửi toàn bộ filters lên cha
+        }
+    };
+    // ✅ Khi click vào các link “a”
+    const handleClickPriceRange = (min: number, max: number | null) => {
+        setFiltersState((prev) => ({
+            ...prev,
+            priceRange: { min, max: max ?? 999999 }, // nếu null → "above"
+        }));
+    };
     useEffect(() => {
         console.log("Các filter hiện tại:", filtersState.selectedOptions);
         if (onFiltersChange) {
             onFiltersChange(filtersState); // 🔹 Gửi toàn bộ state lên cha
         }
-    }, [filtersState.selectedOptions]);
+    }, [filtersState.selectedOptions, filtersState.priceRange]);
     return (
         <>
             <h4>Recently use filter</h4>
@@ -76,25 +86,25 @@ const FilterInfo: React.FC<Props> = ({ keyword, onFiltersChange }) => {
             </div>
             <br />
             <p><b>Price</b></p>
-            <p><b>$3 - ${priceRange.toLocaleString()}</b></p>
+            <p><b>${filtersState.priceRange.min} - ${filtersState.priceRange.max}</b></p>
             {/* thanh slider */}
             <div className='flex flex-row justify-center items-center gap-2'>
                 <input
                     type="range"
                     min={3}
-                    max={28000}
-                    value={filtersState.price}
-                    onChange={(e) => setFiltersState(prev => ({ ...prev, price: Number(e.target.value) }))}
+                    max={2800}
+                    value={filtersState.priceRange.max}
+                    onChange={handlePriceRangeChange}  // <-- Gọi hàm ở trên
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg"
                 />
-                <button className='border rounded-full px-3'>Go</button>
+                <button onClick={handleApplyPriceFilter} className='border rounded-full px-3'>Go</button>
             </div>
             <div className='py-1'>
-                <p><a href="">Up to $45</a></p>
-                <p><a href="">$45 to $90</a></p>
-                <p><a href="">$90 to $150</a></p>
-                <p><a href="">$150 to $200</a></p>
-                <p><a href="">$200 to above</a></p>
+                <p><a onClick={() => handleClickPriceRange(3, 45)}>Up to $45</a></p>
+                <p><a onClick={() => handleClickPriceRange(45, 90)}>$45 to $90</a></p>
+                <p><a onClick={() => handleClickPriceRange(90, 150)}>$90 to $150</a></p>
+                <p><a onClick={() => handleClickPriceRange(150, 200)}>$150 to $200</a></p>
+                <p><a onClick={() => handleClickPriceRange(200, null)}>$200 to above</a></p>
             </div>
             <div className='py-2'>
                 <p><b>Customer Reviews</b></p>

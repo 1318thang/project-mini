@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { productType } from "../type/productType";
-import type { attributeValueFilterType } from "../type/attribute/AttributeValueFilterType";
+import type { productType } from "../../type/product/productType";
+import type { attributeValueFilterType } from "../../type/attribute/AttributeValueFilterType";
+import type { ProductAttributeResultType } from "../../type/product/ProductAttributeResultType";
 interface ProductState {
     products: productType[];
     latestProducts: productType[]; // sản phẩm mới nhất
@@ -12,6 +13,7 @@ interface ProductState {
     getProductImageRandom: productType[];
     getProductShoppingTrend: productType[];
     trends: Record<string, productType[]>; // ✅ linh hoạt cho từng loại trend
+    getProductsByCategoryAndAttribute: ProductAttributeResultType[];
     loading: boolean;
     error: string | null;
 }
@@ -25,6 +27,7 @@ const initialState: ProductState = {
     getProductImageRandom: [],
     getProductShoppingTrend: [],
     trends: {},
+    getProductsByCategoryAndAttribute: [],
     loading: false,
     error: null
 };
@@ -79,8 +82,42 @@ const productSlice = createSlice({
             const { key, data } = action.payload;
             state.trends[key] = data;
         },
+        GetProductsByCategoryAndAttribute: (state, action: PayloadAction<ProductAttributeResultType[]>) => {
+            state.getProductsByCategoryAndAttribute = action.payload;
+        },
+        toggleProductAttributeInProducts: (state, action: PayloadAction<{ valueId: number }>) => {
+            const { valueId } = action.payload;
+            for (const product of state.getProductsByCategoryAndAttribute) {
+                const attr = product.attributeValues.find(
+                    (v: any) => v.productAttributeValueId === valueId
+                );
+                if (attr) {
+                    // đảo trạng thái ngay (optimistic)
+                    attr.isActive = !attr.isActive;
+                    break; // tìm thấy rồi thoát vòng
+                }
+            }
+        },
+        // ✅ Thêm attribute value mới trực tiếp vào sản phẩm trong Redux
+        addAttributeValueToProduct: (
+            state,
+            action: PayloadAction<{ productId: number; newValue: { productAttributeValueId: number; value: string; isActive: boolean } }>
+        ) => {
+            const { productId, newValue } = action.payload;
+
+            // Tìm sản phẩm trong danh sách hiển thị hiện tại
+            const product = state.getProductsByCategoryAndAttribute.find(
+                (p) => p.productId === productId
+            );
+
+            if (product) {
+                // Nếu sản phẩm tồn tại, thêm attribute mới
+                if (!product.attributeValues) product.attributeValues = [];
+                product.attributeValues.push(newValue);
+            }
+        },
     }
 })
-export const { getSearchPro, getAllProducts, getProductLasted, getProductHome, createProduct, getId, getFilterProductsByAttributes, editProduct, getProductsImageRandom, setTrend, setLoading } =
+export const { getSearchPro, getAllProducts, getProductLasted, getProductHome, createProduct, getId, getFilterProductsByAttributes, editProduct, getProductsImageRandom, setTrend, setLoading, GetProductsByCategoryAndAttribute, toggleProductAttributeInProducts, addAttributeValueToProduct } =
     productSlice.actions;
 export default productSlice.reducer;

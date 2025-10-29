@@ -16,5 +16,16 @@ export const CategoryRepository = {
             ...cate,
 
         }));
-    }
+    },
+    async getCategoryAttributeJson(): Promise<string> {
+        try {
+            const jsonString = await cateService.getCategoryAttributesJson();
+            console.log("json = " + jsonString)
+            return jsonString;
+        } catch (e: any) {
+            console.error(e);
+            return "[]";
+        }
+    },
+
 }
