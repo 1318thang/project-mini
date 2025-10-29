@@ -3,7 +3,8 @@ class SignalRService {
     private connection: HubConnection | null = null;
     public start() {
         this.connection = new HubConnectionBuilder()
-            .withUrl("https://localhost:7140/productHub") // URL backend
+            // .withUrl("https://localhost:7140/productHub")
+            .withUrl("https://bold-wind-c8e3.1318thang.workers.dev/productHub") // URL backend
             .withAutomaticReconnect()
             .configureLogging(LogLevel.Debug)
             .build();
