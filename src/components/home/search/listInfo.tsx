@@ -76,7 +76,7 @@ const ListInfo: React.FC = () => {
                                 {/* RIGHT: Thông tin sản phẩm */}
                                 <div className="flex flex-col md:flex-row justify-between flex-grow px-0 md:px-4 gap-4 md:gap-10">
                                     <div className='flex-1 min-w-0'>
-                                        <a href={`/productdetail/${p.id}`}>
+                                        <a href={`#/productdetail/${p.id}`}>
                                             <h2 className="text-lg font-semibold text-gray-800 line-clamp-2 hover:text-blue-600 cursor-pointer">
                                                 {p.name}
                                             </h2>

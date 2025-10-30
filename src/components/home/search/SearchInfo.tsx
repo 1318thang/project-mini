@@ -113,7 +113,7 @@ const SearchInfo: React.FC<Props> = () => {
                         </div>
                         {/* === THÔNG TIN SẢN PHẨM === */}
                         <div className="flex flex-col gap-2 text-center flex-grow justify-between">
-                            <a href={`/productdetail/${p.id}`}>
+                            <a href={`#/productdetail/${p.id}`}>
                                 <p className="text-base font-medium line-clamp-2 h-12 text-gray-700">{p.name}</p>
                             </a>
                             <p className="text-lg font-semibold text-red-500">${p.price}</p>
