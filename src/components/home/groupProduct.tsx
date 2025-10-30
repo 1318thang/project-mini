@@ -10,7 +10,7 @@ const GroupProduct: React.FC = () => {
             { img: "https://res.cloudinary.com/dzayvuc1z/image/upload/v1761016584/pexels-micaasato-1082528_1_eyg4y4.jpg", keyword: "jean" },
         ],
         [
-            { img: "https://res.cloudinary.com/dzayvuc1z/image/upload/v1761017007/pexels-blankspace-2647714_1_hvizzs.jpg", keyword: "tabel" },
+            { img: "https://res.cloudinary.com/dzayvuc1z/image/upload/v1761017007/pexels-blankspace-2647714_1_hvizzs.jpg", keyword: "table" },
             { img: "https://res.cloudinary.com/dzayvuc1z/image/upload/v1761017007/pexels-donghuangmingde-2177482_1_dhefec.jpg", keyword: "booksheft" },
             { img: "https://res.cloudinary.com/dzayvuc1z/image/upload/v1761017007/pexels-markusspiske-105004_1_htuqnq.jpg", keyword: "chair" },
             { img: "https://res.cloudinary.com/dzayvuc1z/image/upload/v1761017007/pexels-pixabay-279746_1_mnugmo.jpg", keyword: "bed" },
